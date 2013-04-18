@@ -1,0 +1,4 @@
+{"ts":1364275618917,"silentsave":true,"restoring":false,"patch":[[]],"length":0}
+{"contributors":[],"silentsave":false,"ts":1364275637123,"patch":[[{"diffs":[[1,"h1 Welcome back"]],"start1":0,"start2":0,"length1":0,"length2":15}]],"length":15,"saved":false}
+{"contributors":[],"silentsave":false,"ts":1365115769611,"patch":[[{"diffs":[[0,"ome back"],[1,"\n\nh2 Call RESPONSES\nul\n li(ng-repeat=\"message in messages\")"]],"start1":7,"start2":7,"length1":8,"length2":67}]],"length":74,"saved":false}
+{"contributors":[],"silentsave":false,"ts":1365116101179,"patch":[[{"diffs":[[0,"at=\""],[-1,"message in messag"],[1,"res in callR"],[0,"es\")"]],"start1":49,"start2":49,"length1":25,"length2":20}]],"length":69,"saved":false}

@@ -1,0 +1,4 @@
+{"ts":1364078968990,"silentsave":true,"restoring":false,"patch":[[]],"length":0}
+{"contributors":[],"silentsave":false,"ts":1364078987700,"patch":[[{"diffs":[[1,"!!! xml\nResponse\n  Say Thank you for pressing 1"]],"start1":0,"start2":0,"length1":0,"length2":47}]],"length":47,"saved":false}
+{"contributors":[],"silentsave":false,"ts":1364083972401,"patch":[[{"diffs":[[0,"Say "],[-1,"Thank you for pressing 1"],[1,"One moment while I connect you to someone at the office.\n  Dial 15417606942"]],"start1":19,"start2":19,"length1":28,"length2":79}]],"length":98,"saved":false}
+{"contributors":[],"silentsave":false,"ts":1365113849868,"patch":[[{"diffs":[[0,"5417"],[-1,"606942"],[1,"406564"]],"start1":88,"start2":88,"length1":10,"length2":10}]],"length":98,"saved":false}

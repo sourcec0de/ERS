@@ -1,0 +1,54 @@
+doctype 5
+html(lang="en")
+  head
+    meta(charset="utf-8")
+    style
+      [ng-cloak]{display:none;}
+      body{padding-top:60px;}
+    script(src="js/async.js")
+    title Emergency Response System
+    link(rel="stylesheet",href="css/bootstrap.css")
+    link(rel="stylesheet",href="css/bootstrap-responsive.css")
+    div(id="pubnub",pub-key="pub-c-80d25b0f-3cb6-4b81-8dca-f56bf581a16c",sub-key="sub-c-5845e5a4-968f-11e2-94d8-12313f022c90")
+  body
+    div(class="navbar navbar-inverse navbar-fixed-top")
+      div(class="navbar-inner")
+        div(class="container-fluid")
+          button(type="button",class="btn btn-navbar",data-toggle="collapse",data-target=".nav-collapse")
+            span(class="icon-bar")
+            span(class="icon-bar")
+            span(class="icon-bar")
+          a.brand(href="#") Miller Timber
+          div(class="nav-collapse collapse")
+            ul.nav
+              li(class="active")
+                a(href="#/newContract")
+                  i(class="icon-plus")
+                  |New Contract
+                
+              li
+                a(href="#/newEmployee") New Employee
+                
+    div(class="container-fluid")
+      div(class="row-fluid")
+        div(class="span3")
+          div(class="well sidebar-nav")
+            ul(class="nav nav-list")
+              li(class="nav-header") Dashboard
+              li(class="active") 
+                a(href="#/home") Home
+              li
+                a(href="#/contracts") Contracts
+              li
+                a(href="#/employees") Employees
+              li
+                a(href="#/calls") Calls
+              li(class="nav-header") List header
+              li
+                a(href="#") Profile
+              li
+                a(href="#") Settings
+              li(class="divider")
+              li
+                a(href="#") Help
+        div(class="span9",ng-view)

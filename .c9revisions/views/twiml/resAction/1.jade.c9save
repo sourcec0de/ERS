@@ -1,0 +1,2 @@
+{"ts":1364083003543,"silentsave":true,"restoring":false,"patch":[[{"diffs":[[1,"!!! xml\nResponse\n  Say Thank, please be at miller timbers office in twenty minutes.\n  Hangup"]],"start1":0,"start2":0,"length1":0,"length2":92}]],"length":92}
+{"contributors":[],"silentsave":false,"ts":1364083027466,"patch":[[{"diffs":[[0,"ay Thank"],[1," you"],[0,", please"]],"start1":20,"start2":20,"length1":16,"length2":20},{"diffs":[[0,"minutes."],[1," You have been marked as available."],[0,"\n  Hangu"]],"start1":79,"start2":79,"length1":16,"length2":51}]],"length":131,"saved":false}

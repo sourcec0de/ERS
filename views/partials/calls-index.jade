@@ -1,0 +1,12 @@
+table(class="table table-hover")
+  thead
+    tr
+      th Called
+      th Duration
+      th Status
+  tbody
+    tr(ng-repeat="call in calls")
+      td
+        a(ng-href="/#/calls/{{call._id}}") {{call.Called}}
+      td {{call.CallDuration}} seconds
+      td {{call.CallStatus}}

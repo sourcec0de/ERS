@@ -1,0 +1,40 @@
+div(class="span3")
+  h1 New Contract Info
+  label Name
+  input(ng-model="contract.name",type="text")
+  label Contractor
+  input(ng-model="contract.contractor",type="text")
+  label Type
+  input(ng-model="contract.type",type="text")
+  label Fulfilled?
+  input(type="checkbox",ng-model="contract.fulfilled")
+  label Fulfillment Date
+  input(type="date",ng-model="contract.fulfillment_date")
+  label Created At:
+  input(type="date",ng-model="contract.created_at")
+  label Updated At:
+  input(type="date",ng-model="contract.updated_at")
+div(class="span3")
+  h1 Employee List
+  input(ng-model="search",type="text",placeholder="Search Employees")
+  div(class="employeeSearch")
+    ul
+      li(ng-repeat="employee in employees | filter:search",ng-click="addToCallList(employee)")
+       p {{employee.first_name + ' ' + employee.last_name}}
+div(class="span6")
+  h1 Call List
+  table(class="table table-hover")
+    thead
+      tr
+        th Name
+        th Phone 1
+        th Phone 2
+        th Phone 3
+        th Reply
+    tbody
+      tr(ng-repeat="call in contract.required_personnel[0].call_list")
+        td {{call.first_name + ' ' + call.last_name}}
+        td {{call.phone_1.number}}
+        td {{call.phone_2.number}}
+        td {{call.phone_3.number}}
+        td {{call.reply}}

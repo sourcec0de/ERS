@@ -1,0 +1,14 @@
+!!! xml
+Response
+  Dial(action='/handleDialStatus',method='GET')
+    Number 19715991578
+    Number 15417606942
+
+//- When <Dial> ends, Twilio will submit to the action URL with the parameter
+//- DialStatus with one of the following scenarios:
+//---------------------------------------------------------------------------
+//- DialStatus=no-answer | nobody picks up                                  |
+//- DialStatus=busy      | the line is busy                                 |
+//- DialStatus=answered  | the called party picked up                       |
+//- DialStatus=failed    | an invalid phone number was provided             |
+//---------------------------------------------------------------------------

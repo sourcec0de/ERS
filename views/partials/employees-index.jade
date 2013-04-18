@@ -1,0 +1,16 @@
+table(class="table table-hover")
+  thead
+    tr
+      th Full Name
+      th Email
+      th City
+      th State
+      th Employee ID
+  tbody
+    tr(ng-repeat="employee in employees")
+      td 
+        a(ng-href="/#/employees/{{employee._id}}") {{employee.first_name}} {{employee.middle_name}} {{employee.last_name}}
+      td {{employee.email}}
+      td {{employee.city}}
+      td {{employee.state}}
+      td {{employee.employee_id}}

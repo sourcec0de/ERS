@@ -1,0 +1,24 @@
+!!! xml
+Response
+  //-Say
+    | Hello From James
+    Say 
+      | This is Miller Timber's Emergency Call System.
+      | please make a selection from the following menu
+      | to confirm your availability for deployment.
+    Pause(length='1')
+    Say
+      | Be sure that the selection that you make is the correct one.
+      | This will affect your record with Miller Timber.
+  
+  Say This is a test of the Miller Timber Emergency Response Call System. Please select an option from the following menu.
+  Pause(length='1')
+  Gather(numDigits='1', timeout='30', action='/actionRes')
+    Say Press 1 if you can be deployed immediately.
+    Pause(length='1')
+    Say Press 2 if you are not available.
+    Pause(length='1')
+    Say Press 3 if you want to be connected with someone in the office.
+    Pause(length='1')
+  Say Your chance to make a selection has timed out, you will be marked as not available.
+  Redirect(method='GET') /actionRes?timeout=true
