@@ -1,18 +1,19 @@
 //require the Twilio module and create a REST client
-var twilio = require('twilio')('AC20e0df1b72aacfd81b7ae828929d931d', '1e20554259bdb8a9dd1982a208f82243')
+var config = require('../config.js').config
+,   twilio = require('twilio')(config.twilio.accountSSID, config.twilio.authToken)
 ,   twilRes = require('../exports/twilRes').twilioResponseParser
 ,   Call = require('../models/call')
 ,   EventEmitter = require("events").EventEmitter
-,   pubnub = require("pubnub").init({
-    publish_key   : "pub-c-80d25b0f-3cb6-4b81-8dca-f56bf581a16c",
-    subscribe_key : "sub-c-5845e5a4-968f-11e2-94d8-12313f022c90"
+,   pubnub = require('pubnub').init({
+    publish_key   : config.pubNub.pubKey,
+    subscribe_key : config.pubNub.subKey
 });
 
 exports.sendSMS = function(req, res) {
   //Send an SMS text message
   twilio.sendSms({
     to: '+' + req.params.number,
-    from: '+15412334656',
+    from: config.twilio.fromNumber,
     body: req.params.text
   }, function(err, responseData) {
     var twRes = twilRes(err, responseData);
@@ -34,10 +35,10 @@ exports.makeCall = function(req,res){
   //Place a phone call, and respond with TwiML instructions from the given URL
   twilio.makeCall({
     to: '+' + req.params.number,
-    from: '+15412334656',
-    url: 'http://ers.skyteclabs.com/twiml/makeCall',
-    StatusCallback: 'http://ers.skyteclabs.com/statusCallback',
-    IfMachine: 'Hangup'
+    from: config.twilio.fromNumber,
+    url: config.twilio.makeCallURL,
+    StatusCallback: config.twilio.statusCallbackURL,
+    IfMachine: config.twilio.ifMachine
     
   }, function(err, responseData) {
     var twRes = twilRes(err, responseData);
@@ -104,7 +105,7 @@ exports.twilioAction = function(req,res){
   }
   
   pubnub.publish({
-    channel : "bc76627d-3852-464c-8bcf-0d6996444b1c",
+    channel : config.pubNub.channel,
     message : notification
   });
   
@@ -152,10 +153,10 @@ exports.multiCall = function(req,res){
     queue.forEach(function(number){
       twilio.makeCall({
         to: '+'+number,
-        from: '+15412334656',
-        url: 'http://ers.skyteclabs.com/twiml/makeCall',
-        StatusCallback: 'http://ers.skyteclabs.com/statusCallback',
-        IfMachine: 'hangup'
+        from: config.twilio.fromNumber,
+        url: config.twilio.makeCallURL,
+        StatusCallback: config.twilio.statusCallbackURL,
+        IfMachine: confif.twilio.ifMachine
       }, function(err, responseData) {
         var twRes = twilRes(err, responseData);
         call.emit('completed', twRes);

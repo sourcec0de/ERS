@@ -3,58 +3,53 @@
  */
 
 var express = require('express')
-//,   redis = require("redis")
-//,   redisClient = redis.createClient()
-,   RedisStore = require('connect-redis')(express)
+,   config = require('./config.js').config
 ,   url = require('url')
-,   colors = require('colors')
+,   rtg = url.parse(config.redisToGoURL)
+,   rtg_pass = rtg.auth.split(":")[1]
+// ,   redis   = require("redis")
+// ,   redisClient = redis.createClient(rtg.port, rtg.hostname)
+,   RedisStore  = require('connect-redis')(express)
+,   session_store = new RedisStore({host: rtg.host, port: rtg.port, pass: rtg_pass, prefix: config.sess_prefix})
+,   session  = function() {return express.session({ store: session_store, secret: config.sess_salt })}
+,   colors   = require('colors')
 ,   mongoose = require('mongoose')
-,   routes = require('./routes')
+,   routes   = require('./routes')
 ;
+// DISPLAY CONFIG
+console.log(JSON.stringify(config,null,2))
 
 var app = module.exports = express(express.logger());
 
 // Connect to MongoDB when app initilizes
-mongoose.connect('mongodb://nix:vbnvbn45@dharma.mongohq.com:10034/miller-timber-staging');
+mongoose.connect(config.mongoURL);
 
 // Configuration
 app.configure(function(){
-  app.set('views', __dirname + '/views');
-  app.set('view engine', 'jade');
-  app.locals.pretty = true;
+  app.set('views', config.viewsDIR);
+  app.set('view engine', config.viewEngine);
+  app.locals.pretty = config.prettyLocals;
   app.use(express.bodyParser());
   app.use(express.methodOverride());
   app.use(app.router);
   //  app.use(express.favicon());
   //  app.use(express.logger('dev'));
   app.use(express.cookieParser());
-  app.use(express.session({ 
-                            secret: 'bb25b6f0-a84f-11e2-9e96-0800200c9a66',
-                            store: new RedisStore({
-                              host:'redis://redistogo:2ff82e84b5708867835939c88f69c0d9@squawfish.redistogo.com',
-                              port:'9430',
-                              db:'ers'
-                            })
-                          }));
-  app.use(require('less-middleware')({ 
-                                      dest: __dirname + '/public/css',
-                                      src: __dirname + '/src/less',
-                                      prefix:'/css',
-                                      compress:true,
-                                      debug:true,
-                                      once:false,
-                                      force:true
-                                      }));
-  app.use(express.static(__dirname + '/public'));
+  app.use(require('less-middleware')(config.lessConfig));
+  app.use(express.static(config.staticDIR));
 });
 
 app.configure('development', function(){
-  app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
+  app.use(express.errorHandler(config.devErrHandler));
 });
 
 app.configure('production', function(){
   app.use(express.errorHandler());
 });
+
+// CORRECT SESSION USE EXAMPLE
+// app.get('/admin', session(), function(req, res) {});
+
 
 // Routes Config
 // Route Functions are passed in as secondary param
@@ -145,8 +140,8 @@ Listen for Messages
 
 
 // Testing Redis Connection
-//redisClient.set("server:name", "Miller Timber ERS");
-//redisClient.get("server:name", function (err, reply) {
+// redisClient.set("server:name", "Miller Timber ERS");
+// redisClient.get("server:name", function (err, reply) {
 //  if(!err){
 //    console.log("Redis connected Successfully");
 //    console.log("Redis Server Name: " + reply.toString());
@@ -154,7 +149,7 @@ Listen for Messages
 //    console.warn("A redis error occured:");
 //    console.warn(err.toString());
 //  }
-//});
+// });
 
 
 
